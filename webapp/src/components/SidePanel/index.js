@@ -15,7 +15,7 @@ class SidePanel extends Component{
       height: '800px',
       width: '300px',
       display: 'inline-block',
-      backgroundColor: '#343a40',
+      backgroundColor: 'rgb(52, 58, 64, 0.95)',
       verticalAlign: 'top',
     }
 

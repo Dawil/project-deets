@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import styled from 'react-emotion';
 import { Link } from 'react-router-dom'
 import SearchBar from '../SearchBar'
+import SuffixPanel from '../SuffixPanel'
 import ColumnSimpleEntry from '../ColumnSimpleEntry'
 
 class ColumnSimple extends Component{
@@ -14,6 +15,11 @@ class ColumnSimple extends Component{
       height: '50px'
     }
 
+    const SuffixPanelEntry = {
+      component: <SuffixPanel />,
+      height: '400px'
+    }
+
     const mainStyle = {
       marginTop: '20px',
       marginLeft: '20px',
@@ -21,8 +27,7 @@ class ColumnSimple extends Component{
       height: 'calc(100% - 40px)',
       width: '500px',
       display: 'inline-block',
-      overflow: 'auto',
-      backgroundColor: 'rgba(91, 113, 83, 0.84)'
+      overflow: 'auto'
     }
 
     const SampleItem = styled('div')`
@@ -34,6 +39,7 @@ class ColumnSimple extends Component{
     return(
       <div style = {mainStyle}>
         <ColumnSimpleEntry entry={SearchBarEntry} />
+        <ColumnSimpleEntry entry={SuffixPanelEntry} />
       </div>
     )
   }

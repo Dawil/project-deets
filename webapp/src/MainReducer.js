@@ -1,29 +1,4 @@
-import * as THREE from 'three'
-
-//sample action creator
-export const UPDATE_POS_INFO = 'UPDATE_POS_INFO'
-
-export const updatePosInfo = (item, direction) => dispatch => {
-  const valueSwitch = (item) => ({
-    "vectorX": 5,
-    "vectorY": 5,
-    "vectorZ": 5,
-    "quarternionVectorX": 0.05,
-    "quarternionVectorY": 0.05,
-    "quarternionVectorZ": 0.05
-  })[item]
-  const directionSwitch = (direction) => ({
-    "up": 1,
-    "down": -1
-  })[direction]
-    let value = valueSwitch(item)*directionSwitch(direction)
-    dispatch({
-      type: UPDATE_POS_INFO,
-      payload: [item, value]
-
-  })
-}
-
+import { SEARCH_PROJECT } from './actions.js'
 
 const initialState = {
   sidePanelItems: [
@@ -31,24 +6,15 @@ const initialState = {
     {number:'246783-00', shortName: 'some project name' },
     {number:'267043-01', shortName: 'some project name' }
   ],
-  loadedObject: null,
-  displayVariables: {
-    vectorX: 0,
-    vectorY: 400,
-    vectorZ: 100,
-    quarternionVectorX: 0.9,
-    quarternionVectorY: 0,
-    quarternionVectorZ: 0
-  }
+  searchData: null
 }
-
 
 export default function (state = initialState, {type, payload}) {
   switch (type) {
-    case UPDATE_POS_INFO: {
+    case SEARCH_PROJECT: {
       return {
         ...state,
-        displayVariables: {...state.displayVariables, [payload['0']]: (state.displayVariables[payload['0']] + payload['1'])}
+        searchData: payload
       }
     }
     default:

@@ -10,8 +10,7 @@ const ColumnSimpleEntry = (props) => {
       height: `${props.entry.height}`,
       width: 'calc(100% - 40px)',
       display: 'block',
-      align: 'top',
-      backgroundColor: '#604a88'
+      align: 'top'
     }
 
     return(

@@ -22,7 +22,8 @@ class SidePanelItem extends Component{
       verticalAlign: 'middle',
       whiteSpace: 'nowrap',
       overflow: 'hidden',
-      textOverflow: 'ellipsis'
+      textOverflow: 'ellipsis',
+      color: 'rgb(255, 255, 255, 0.5)'
     }
 
     return(
