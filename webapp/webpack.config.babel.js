@@ -35,6 +35,7 @@ module.exports = {
           path.resolve(__dirname, 'node_modules', 'drmonty-leaflet-awesome-markers'),
           path.resolve(__dirname, 'node_modules', 'font-awesome'),
           path.resolve(__dirname, 'node_modules', 'bootstrap'),
+          path.resolve(__dirname, 'node_modules', 'semantic-ui-css'),
           path.resolve(__dirname, 'src')
         ],
         use: [ 'style-loader', 'css-loader' ]
@@ -44,7 +45,8 @@ module.exports = {
         include: [
           path.resolve(__dirname, 'node_modules', 'leaflet'),
           path.resolve(__dirname, 'node_modules', 'drmonty-leaflet-awesome-markers'),
-          path.resolve(__dirname, 'node_modules', 'font-awesome')
+          path.resolve(__dirname, 'node_modules', 'font-awesome'),
+          path.resolve(__dirname, 'node_modules', 'semantic-ui-css')
         ],
         use: 'file-loader'
       },

@@ -18,10 +18,6 @@ class GenericHeader extends Component{
       alignItems: 'center'
     }
 
-    const navName = {
-      height: '34px'
-    }
-
     const HeaderTitle = styled('div')`
       height: 40px;
       padding: 0.3125rem;
@@ -69,7 +65,7 @@ class GenericHeader extends Component{
               </HeaderIcon>
             </HeaderTitle>
           </NavItem>
-          <NavItem style = {navName}>
+          <NavItem>
             <HeaderName>
               <Link to="/" className='router-link-main'>{headerContent.name}</Link>
               </HeaderName>

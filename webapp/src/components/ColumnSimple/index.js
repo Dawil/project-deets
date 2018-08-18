@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import SearchBar from '../SearchBar'
 import SuffixPanel from '../SuffixPanel'
 import ColumnSimpleEntry from '../ColumnSimpleEntry'
+import CheckBox from '../CheckBox'
+import AddButton from '../AddButton'
 
 class ColumnSimple extends Component{
 
@@ -18,6 +20,16 @@ class ColumnSimple extends Component{
     const SuffixPanelEntry = {
       component: <SuffixPanel />,
       height: '400px'
+    }
+
+    const CheckBoxEntry = {
+      component: <CheckBox />,
+      height: '20px'
+    }
+
+    const AddButtonEntry = {
+      component: <AddButton />,
+      height: '50px'
     }
 
     const mainStyle = {
@@ -40,6 +52,8 @@ class ColumnSimple extends Component{
       <div style = {mainStyle}>
         <ColumnSimpleEntry entry={SearchBarEntry} />
         <ColumnSimpleEntry entry={SuffixPanelEntry} />
+        <ColumnSimpleEntry entry={CheckBoxEntry} />
+        <ColumnSimpleEntry entry={AddButtonEntry} />
       </div>
     )
   }

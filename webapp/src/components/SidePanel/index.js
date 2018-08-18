@@ -8,7 +8,7 @@ class SidePanel extends Component{
 
   render() {
 
-    const { sidePanelItems } = this.props
+    const { myProjects } = this.props
 
     const mainStyle = {
       padding: '20px',
@@ -28,9 +28,9 @@ class SidePanel extends Component{
     return(
       <div style = {mainStyle}>
         {
-          sidePanelItems ?
-            sidePanelItems.map( item =>
-              <SidePanelItem key={item.number} projectNumber={item.number} projectName={item.shortName}/>
+          myProjects ?
+            myProjects.map( item =>
+              <SidePanelItem key={item.project_number.substring(0,6) + '-' + item.project_number.substring(6,8)} projectNumber={item.project_number.substring(0,6) + '-' + item.project_number.substring(6,8)} projectName={item.project_name}/>
             )
           : null
         }
@@ -41,6 +41,6 @@ class SidePanel extends Component{
 
 export default connect(
   state => ({
-    sidePanelItems: state.MainReducer.sidePanelItems
+    myProjects: state.MainReducer.myProjects
   }), null
 )(SidePanel)

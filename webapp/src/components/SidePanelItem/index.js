@@ -9,7 +9,16 @@ class SidePanelItem extends Component{
 
     const { projectNumber, projectName } = this.props
 
+    const DivWithHover = styled('div')`
+
+      &:hover {
+        color: rgba(255, 255, 255, 0.75) !important;
+        text-decoration: none;
+      }
+    `
+
     const mainStyle = {
+      cursor: 'pointer',
       marginTop: '20px',
       marginBottom: '20px',
       marginLeft: '10px',
@@ -27,9 +36,9 @@ class SidePanelItem extends Component{
     }
 
     return(
-      <div style = {mainStyle}>
+      <DivWithHover style = {mainStyle}>
         {projectNumber} - {projectName}
-      </div>
+      </DivWithHover>
     )
   }
 }

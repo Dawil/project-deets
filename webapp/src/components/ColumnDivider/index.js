@@ -2,19 +2,21 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'react-emotion';
 import { Link } from 'react-router-dom'
-import ColumnSimple from '../ColumnSimple';
-import ColumnDivider from '../ColumnDivider';
-import ColumnDetail from '../ColumnDetail';
 
-class PageColumns extends Component{
+class ColumnDivider extends Component{
 
   render() {
 
     const mainStyle = {
-      height: '800px',
-      backgroundColor: '#435a77',
+      marginRight: '20px',
+      marginLeft: '20px',
+      marginTop: '40px',
+      height: 'calc(100% - 80px)',
+      width: '2px',
       display: 'inline-block',
-      width: 'calc(100% - 300px)',
+      overflow: 'auto',
+      verticalAlign: 'top',
+      backgroundColor: 'rgba(255, 255, 255)'
     }
 
     const SampleItem = styled('div')`
@@ -25,14 +27,9 @@ class PageColumns extends Component{
 
     return(
       <div style = {mainStyle}>
-        <ColumnSimple />
-        <ColumnDivider />
-        <ColumnDetail />
       </div>
     )
   }
 }
 
-export default connect(
-  null, null
-)(PageColumns)
+export default ColumnDivider

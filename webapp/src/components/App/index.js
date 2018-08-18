@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import GenericHeader from '../GenericHeader';
 import Wrapper from '../Wrapper';
+import { getProjects } from '../../actions.js'
 
 class App extends Component {
 
+  componentDidMount() {
+    this.props.getProjects()
+  }
 
   render() {
 
@@ -28,5 +32,8 @@ class App extends Component {
 }
 
 export default connect(
-  null,null
+  null,
+  {
+    getProjects
+  }
 )(App)
