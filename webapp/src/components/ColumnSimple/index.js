@@ -8,7 +8,7 @@ import ColumnSimpleEntry from '../ColumnSimpleEntry'
 import CheckBox from '../CheckBox'
 import AddButton from '../AddButton'
 
-class ColumnSimple extends Component{
+class ColumnSimples extends Component{
 
   render() {
 
@@ -36,6 +36,7 @@ class ColumnSimple extends Component{
       marginTop: '20px',
       marginLeft: '20px',
       marginBottom: '20px',
+      marginRight: '20px',
       height: 'calc(100% - 40px)',
       width: '500px',
       display: 'inline-block',
@@ -61,4 +62,4 @@ class ColumnSimple extends Component{
 
 export default connect(
   null, null
-)(ColumnSimple)
+)(ColumnSimples)

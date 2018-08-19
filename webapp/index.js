@@ -4,9 +4,11 @@ var webpackDevMiddleware = require('webpack-dev-middleware');
 
 var app = express();
 var config = require('./webpack.config.babel.js');
+var history = require('connect-history-api-fallback');
 var compiler = webpack(config);
 var PORT = 3001;
 
+app.use(history())
 app.use(webpackDevMiddleware(compiler))
 
 app.get('stuff', (req, res) => {

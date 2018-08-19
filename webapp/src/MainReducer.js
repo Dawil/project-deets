@@ -7,11 +7,6 @@ import {
 } from './actions.js'
 
 const initialState = {
-  sidePanelItems: [
-    {number:'234096-00', shortName: 'some project name' },
-    {number:'246783-00', shortName: 'some project name' },
-    {number:'267043-01', shortName: 'some project name' }
-  ],
   searchData: null,
   selectedProject: null,
   myProjects: [],

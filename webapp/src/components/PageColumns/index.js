@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'react-emotion';
 import { Link } from 'react-router-dom'
+import ColumnEntry from '../ColumnEntry';
 import ColumnSimple from '../ColumnSimple';
 import ColumnDivider from '../ColumnDivider';
 import ColumnDetail from '../ColumnDetail';
@@ -9,6 +10,12 @@ import ColumnDetail from '../ColumnDetail';
 class PageColumns extends Component{
 
   render() {
+    const { columns } = this.props
+    console.log(columns)
+
+    const columnSimple = {component: <ColumnSimple />}
+    const columnDivider = {component: <ColumnDivider />}
+    const columnDetail = {component: <ColumnDetail />}
 
     const mainStyle = {
       height: '800px',
@@ -25,9 +32,13 @@ class PageColumns extends Component{
 
     return(
       <div style = {mainStyle}>
-        <ColumnSimple />
-        <ColumnDivider />
-        <ColumnDetail />
+        {
+          columns?
+            columns.map((item, index) =>
+              <ColumnEntry key={index} entry={item} />
+            )
+          : null
+        }
       </div>
     )
   }

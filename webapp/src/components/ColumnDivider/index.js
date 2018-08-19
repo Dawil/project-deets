@@ -2,10 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'react-emotion';
 import { Link } from 'react-router-dom'
+import GenericContainer from '../GenericContainer'
+import Divider from '../Divider'
 
 class ColumnDivider extends Component{
 
   render() {
+
+    const divider = {component: <Divider />}
 
     const mainStyle = {
       marginRight: '20px',
@@ -27,6 +31,7 @@ class ColumnDivider extends Component{
 
     return(
       <div style = {mainStyle}>
+        <GenericContainer entry={divider} />
       </div>
     )
   }

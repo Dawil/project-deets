@@ -8,17 +8,16 @@ import ColumnSimple from '../ColumnSimple';
 import ColumnDivider from '../ColumnDivider';
 import ColumnDetail from '../ColumnDetail';
 
-class Wrapper extends Component {
+class MyProjects extends Component {
 
 
   render() {
 
-    const columnSimple = {component: <ColumnSimple />}
     const columnDivider = {component: <ColumnDivider />}
     const columnDetail = {component: <ColumnDetail />}
 
     const stuffToRender = [
-      columnSimple,
+      columnDetail,
       columnDivider,
       columnDetail
     ]
@@ -51,4 +50,4 @@ class Wrapper extends Component {
 
 export default connect(
   null,null
-)(Wrapper)
+)(MyProjects)

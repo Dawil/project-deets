@@ -13,8 +13,9 @@ import { Route } from 'react-router'
 
 import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
 
-import { createStore, applyMiddleware, compose  } from 'redux'
-import reducer from './reducer'
+import { createStore, applyMiddleware, compose, combineReducers  } from 'redux'
+
+import MainReducer from './MainReducer'
 
 import thunk from 'redux-thunk'
 
@@ -22,8 +23,12 @@ export const history = createHistory()
 
 const middleWare = [thunk, routerMiddleware(history)]
 const reduxDevToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+const combinedReducers = combineReducers({
+    MainReducer,
+    router: routerReducer
+  })
 
-let store = applyMiddleware(...middleWare)(createStore)(reducer, reduxDevToolsExtension)
+let store = applyMiddleware(...middleWare)(createStore)(combinedReducers, reduxDevToolsExtension)
 
 
 ReactDOM.render(

@@ -2,28 +2,21 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'react-emotion';
 import { Link } from 'react-router-dom'
-import SearchBar from '../SearchBar'
-import ColumnSimpleEntry from '../ColumnSimpleEntry'
 
-class ColumnDetail extends Component{
+class ColumnDivider extends Component{
 
   render() {
 
-    const SearchBarEntry = {
-      component: <SearchBar />,
-      height: '50px'
-    }
-
     const mainStyle = {
-      marginTop: '20px',
-      marginLeft: '20px',
-      marginBottom: '20px',
       marginRight: '20px',
-      height: 'calc(100% - 40px)',
-      width: '500px',
+      marginLeft: '20px',
+      marginTop: '40px',
+      height: 'calc(100% - 80px)',
+      width: '2px',
       display: 'inline-block',
       overflow: 'auto',
-      backgroundColor: 'rgba(91, 113, 83, 0.84)'
+      verticalAlign: 'top',
+      backgroundColor: 'rgba(255, 255, 255)'
     }
 
     const SampleItem = styled('div')`
@@ -39,6 +32,4 @@ class ColumnDetail extends Component{
   }
 }
 
-export default connect(
-  null, null
-)(ColumnDetail)
+export default ColumnDivider
