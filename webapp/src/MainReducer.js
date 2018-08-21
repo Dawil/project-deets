@@ -3,7 +3,8 @@ import {
   SELECT_PROJECT,
   ADD_PROJECT,
   GET_PROJECTS,
-  SET_MAKE_ACTIVE
+  SET_MAKE_ACTIVE,
+  UPDATE_PROJECT_STATUS
 } from './actions.js'
 
 const initialState = {
@@ -47,6 +48,15 @@ export default function (state = initialState, {type, payload}) {
       return {
         ...state,
         makeActive: payload
+      }
+    }
+    case UPDATE_PROJECT_STATUS: {
+      return {
+        ...state,
+        myProjects: state.myProjects.map(
+            (entry, i) => i == payload[0] ? {...entry, project_status: payload[1]}
+                                    : entry
+        )
       }
     }
     default:

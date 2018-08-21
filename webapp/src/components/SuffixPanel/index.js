@@ -44,7 +44,7 @@ class SuffixPanel extends Component{
 
     const middleDivStyle = {
       border: '0px solid black',
-      borderRadius: '25px',
+      borderRadius: '40px',
       width:'460px',
       height: `${this.props.xzibitProps}`,
       textAlign : 'center',
@@ -70,24 +70,24 @@ class SuffixPanel extends Component{
     const blankEntryStyle = [
       {
         backgroundColor: 'rgb(52, 58, 64, 0.5)',
-        height: '20px',
+        height: '40px',
       },
       {
         backgroundColor: 'rgb(33, 37, 41, 0.5)',
-        height: '20px',
+        height: '40px',
       },
     ]
 
     const suffixEntryStyle = {
       width:'10%',
-      height: '20px',
+      height: '40px',
       display: 'inline-block',
       color: 'rgb(255, 255, 255)'
     }
 
     const AccountingCentreCodeEntryStyle = {
       width:'10%',
-      height: '20px',
+      height: '40px',
       display: 'inline-block',
       color: 'rgb(255, 255, 255, 0.5)'
     }
@@ -95,7 +95,7 @@ class SuffixPanel extends Component{
     const DivWithHover = styled('div')`
       cursor: pointer;
       width: 80%;
-      height:  20px;
+      height:  40px;
       display: inline-block;
       color: rgb(255, 255, 255, 0.5);
 
@@ -107,7 +107,7 @@ class SuffixPanel extends Component{
 
     const placeHolderStyle = {
       width:'100%',
-      height: '20px',
+      height: '40px',
       display: 'inline-block',
       color: 'rgb(255, 255, 255, 0.5)'
     }

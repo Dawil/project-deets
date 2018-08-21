@@ -3,6 +3,7 @@ export const SELECT_PROJECT = 'SELECT_PROJECT'
 export const ADD_PROJECT = 'ADD_PROJECT'
 export const GET_PROJECTS = 'GET_PROJECTS'
 export const SET_MAKE_ACTIVE = 'SET_MAKE_ACTIVE'
+export const UPDATE_PROJECT_STATUS = 'UPDATE_PROJECT_STATUS'
 
 export const searchProject = jobNumber => dispatch => {
   let url = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/search_project?jobnumber=' + jobNumber
@@ -50,10 +51,15 @@ export const addProject = (jobDetails, makeActive) => dispatch => {
 
 export const getProjects = () => dispatch => {
   let url = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/get-project'
-  let data
+  let data = []
   fetch(url)
   .then(response => response.json())
   .then(response => {
+
+    response.table_entries.Items.map(item => {
+      data.push({[item.project_number]: item})
+    })
+
     dispatch({
       type: GET_PROJECTS,
       payload: response.table_entries.Items
@@ -69,4 +75,10 @@ export const selectProject = (jobNumber, jobName) => ({
 export const setMakeActive = boolean => ({
   type: SET_MAKE_ACTIVE,
   payload: !boolean
+})
+
+export const updateProjectStatus = (projectindex, value) => ({
+  type: UPDATE_PROJECT_STATUS,
+  payload: [projectindex, value],
+  console: console.log([projectindex, value])
 })

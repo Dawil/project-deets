@@ -12,7 +12,7 @@ class SidePanel extends Component{
 
     const mainStyle = {
       padding: '20px',
-      height: '800px',
+      height: '100%',
       width: '300px',
       display: 'inline-block',
       backgroundColor: 'rgb(52, 58, 64, 0.95)',

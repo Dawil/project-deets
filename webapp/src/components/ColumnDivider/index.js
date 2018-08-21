@@ -12,8 +12,6 @@ class ColumnDivider extends Component{
     const divider = {component: <Divider />}
 
     const mainStyle = {
-      marginRight: '20px',
-      marginLeft: '20px',
       marginTop: '40px',
       height: 'calc(100% - 80px)',
       width: '2px',
