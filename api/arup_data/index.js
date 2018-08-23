@@ -4,13 +4,12 @@ var querystring = require('querystring');
 
 exports.handle = function (e, ctx, callback) {
 
-
 //var app = express();
 
-var authorityHostUrl = 'https://login.microsoftonline.com';
-var tenant = '4ae48b41-0137-4599-8661-fc641fe77bea/oauth2/token';
+let authorityHostUrl = 'https://login.microsoftonline.com';
+let tenant = '4ae48b41-0137-4599-8661-fc641fe77bea/oauth2/token';
 
-var axiosConfigToken = {
+let axiosConfigToken = {
   grant_type: 'password',
   resource: 'https://arup.onmicrosoft.com/AIS',
   username: '',
@@ -19,13 +18,56 @@ var axiosConfigToken = {
   scope: 'openid'
 };
 
-let jobNumber = e['queryStringParameters']['jobnumber'] + '00' || 00000000
+let queryType = e['queryStringParameters']['type']
+let queryPayload = e['queryStringParameters']['value']
+let endpoint
+
+switch (queryType) {
+  case 'JobNumber':
+    endpoint = 'Projects?$expand=Jobs&$filter=ProjectCode eq \'' + queryPayload + '00\''
+    break;
+  case 'AccountingCentreCode':
+    endpoint = 'AccountingCentres(\'' + queryPayload + '\')'
+    break;
+  case 'GroupCode':
+    endpoint = 'Groups(\'' + queryPayload + '\')'
+    break;
+  case 'RegionCode':
+    endpoint = 'Regions(\'' + queryPayload + '\')'
+    break;
+  case 'PracticeCode':
+    endpoint = 'Practices(\'' + queryPayload + '\')'
+    break;
+  case 'BusinessCode':
+    endpoint = 'Businesses(\'' + queryPayload + '\')'
+    break;
+  case 'ProjectDirectorId':
+  case 'ProjectManagerId':
+    endpoint = 'Staff(\'' + queryPayload + '\')'
+    break;
+  case 'CountryCode':
+    endpoint = 'Countries(\'' + queryPayload + '\')'
+    break;
+  case 'ClientCode':
+    endpoint = 'Clients(\'' + queryPayload + '\')'
+    break;
+  default:
+    let failedResponse = {
+        "statusCode": 200,
+        "headers": {
+          "Access-Control-Allow-Origin": "*"
+        },
+        "body": 'No parameter \'type\' provided. Please make sure both the \'type\' and \'value\' parameters have been provided',
+        "isBase64Encoded": false
+    };
+    callback(null, failedResponse)
+}
 
 axios.post('https://login.microsoftonline.com/' + tenant, querystring.stringify(axiosConfigToken))
   .then(function(response){
       axios({
         method: 'get',
-        url: 'https://adsprapiman-aue.azure-api.net/cds/odata/Projects?$expand=Jobs&$filter=ProjectCode eq ' + '\'' + jobNumber + '\'',
+        url: 'https://adsprapiman-aue.azure-api.net/cds/odata/' + endpoint,
         headers: {
           'Ocp-Apim-Subscription-Key': 'f7782428563545f4a4eb0ed3dfdaa250',
           'Authorization': 'Bearer '+ response.data.access_token,

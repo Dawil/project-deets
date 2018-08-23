@@ -13,7 +13,7 @@ class RadioGroup extends Component {
     const { number, updateProjectStatus, myProjects, index } = this.props
     this.setState({ value })
     console.log(myProjects[index].project_status == 'active')
-    updateProjectStatus(index, {value}['value'])
+    updateProjectStatus(index, number, {value}['value'])
   }
 
   render() {

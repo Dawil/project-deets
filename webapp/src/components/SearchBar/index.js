@@ -10,7 +10,7 @@ class SearchBar extends Component{
     const { searchProject } = this.props
     if (e.target.value.length == 6 && /^\d+$/.test(e.target.value)) {
       console.log('searching')
-      searchProject(e.target.value)
+      searchProject('JobNumber', e.target.value)
     }
   }
 

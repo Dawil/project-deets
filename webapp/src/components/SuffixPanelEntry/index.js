@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'react-emotion';
 import { Link } from 'react-router-dom'
-import SuffixPanelEntry from '../SuffixPanelEntry'
 import { selectProject } from '../../actions.js'
 
-class SuffixPanel extends Component{
+class SuffixPanelEntry extends Component{
 
   constructor(){
     super()
@@ -15,10 +14,12 @@ class SuffixPanel extends Component{
   }
 
   selectProject = (e) => {
+    const { selectProject, index, searchData } = this.props
+    console.log(index)
     this.setState({
       selected: e.target.id
     })
-    this.props.selectProject(e.target.id, e.target.innerHTML)
+    selectProject(e.target.id, e.target.innerHTML, searchData.value[0].Jobs[index])
   }
 
   fillBlanks = (currentRows) => {
@@ -35,7 +36,7 @@ class SuffixPanel extends Component{
 
   render() {
 
-    const { searchData } = this.props
+    const { searchData, job, index } = this.props
 
     const mainStyle = {
       display: 'block',
@@ -114,25 +115,10 @@ class SuffixPanel extends Component{
     }
 
     return(
-      <div style = {mainStyle}>
-        <div style = {middleDivStyle} className='noscroll'>
-          {
-            searchData ?
-              searchData.value[0].Jobs.map((job, index) =>
-                <SuffixPanelEntry key={job.JobSuffix} index={index} job={job} />
-              )
-            : null
-          }
-          {
-            searchData ?
-              this.fillBlanks(searchData.value[0].Jobs.length).map((item, index) =>
-                <div key={index+'outer'} style={blankEntryStyle[index % blankEntryStyle.length]}>
-                  <div key={index+'inner'} style={placeHolderStyle}></div>
-                </div>
-              )
-            : null
-          }
-        </div>
+      <div onClick={this.selectProject} key={job.JobSuffix} style={entryStyle[index % entryStyle.length]}>
+        <div style={suffixEntryStyle} key={job.JobSuffix} id={job.JobCode}>{job.JobSuffix}</div>
+        <div style={AccountingCentreCodeEntryStyle} key={job.AccountingCentreCode} id={job.JobCode}>{job.AccountingCentreCode}</div>
+        <DivWithHover key={job.JobNameShort} id={job.JobCode}>{job.JobNameShort}</DivWithHover>
       </div>
     )
   }
@@ -145,4 +131,4 @@ export default connect(
   {
     selectProject
   }
-)(SuffixPanel)
+)(SuffixPanelEntry)

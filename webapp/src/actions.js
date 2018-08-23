@@ -5,8 +5,8 @@ export const GET_PROJECTS = 'GET_PROJECTS'
 export const SET_MAKE_ACTIVE = 'SET_MAKE_ACTIVE'
 export const UPDATE_PROJECT_STATUS = 'UPDATE_PROJECT_STATUS'
 
-export const searchProject = jobNumber => dispatch => {
-  let url = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/search_project?jobnumber=' + jobNumber
+export const searchProject = (type, value) => dispatch => {
+  let url = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/search_project?type=' + type + '&value=' + value
   let data
   fetch(url)
   .then(response => response.json())
@@ -16,6 +16,7 @@ export const searchProject = jobNumber => dispatch => {
         type: SEARCH_PROJECT,
         payload: response
       })
+
     } else {
       dispatch({
         type: SEARCH_PROJECT,
@@ -67,18 +68,30 @@ export const getProjects = () => dispatch => {
   })
 }
 
-export const selectProject = (jobNumber, jobName) => ({
-  type: SELECT_PROJECT,
-  payload: [jobNumber, jobName]
-})
+export const selectProject = (jobNumber, jobName, jobData) => dispatch => {
+  let url = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/search_project?type=AccountingCentreCode' + '&value=' + jobData.AccountingCentreCode
+  let url1 = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/search_project?type=GroupCode' + '&value=' + jobData.GroupCode
+
+  dispatch({
+    type: SELECT_PROJECT,
+    payload: [jobNumber, jobName]
+  })
+  fetch(url).then(response => response.json()).then(response => { console.log(response.value[0].AccountingCentreName) })
+  fetch(url1).then(response => response.json()).then(response => { console.log(response.value[0].GroupName) })
+}
 
 export const setMakeActive = boolean => ({
   type: SET_MAKE_ACTIVE,
   payload: !boolean
 })
 
-export const updateProjectStatus = (projectindex, value) => ({
-  type: UPDATE_PROJECT_STATUS,
-  payload: [projectindex, value],
-  console: console.log([projectindex, value])
-})
+
+export const updateProjectStatus = (projectindex, number, value) => dispatch => {
+  let url = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/update-project?project_number=' +
+  number + '&project_status=' + value
+  dispatch({
+    type: UPDATE_PROJECT_STATUS,
+    payload: [projectindex, value]
+  })
+  fetch(url)
+}
