@@ -1,3 +1,5 @@
+var debounce = require('debounce');
+
 export const SEARCH_PROJECT = 'SEARCH_PROJECT'
 export const SELECT_PROJECT = 'SELECT_PROJECT'
 export const ADD_PROJECT = 'ADD_PROJECT'
@@ -5,6 +7,7 @@ export const GET_PROJECTS = 'GET_PROJECTS'
 export const SET_MAKE_ACTIVE = 'SET_MAKE_ACTIVE'
 export const UPDATE_PROJECT_STATUS = 'UPDATE_PROJECT_STATUS'
 export const SET_PROJECT_METADATA = 'SET_PROJECT_METADATA'
+export const UPDATE_PROJECT_NOTES = 'UPDATE_PROJECT_NOTES'
 
 export const searchProject = (type, value) => dispatch => {
   let url = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/search_project?type=' + type + '&value=' + value
@@ -93,10 +96,29 @@ export const setMakeActive = boolean => ({
 
 export const updateProjectStatus = (projectindex, number, value) => dispatch => {
   let url = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/update-project?project_number=' +
-  number + '&project_status=' + value
+  number + '&project_value=' + value + '&update_type=project_status'
   dispatch({
     type: UPDATE_PROJECT_STATUS,
     payload: [projectindex, value]
   })
   fetch(url)
+}
+
+function expensiveOperation(text, number) {
+  let value
+  text == '' ? value = 'blankTextField' : value
+  let url = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/update-project?project_number=' +
+  number + '&project_value=' + value + '&update_type=project_text'
+  fetch(url)
+}
+const thing = debounce(expensiveOperation, 1000)
+
+export const updateProjectNotes = (text, index, number) => dispatch => {
+
+  thing(text, number)
+
+  dispatch({
+    type: UPDATE_PROJECT_NOTES,
+    payload: [text, index]
+  })
 }

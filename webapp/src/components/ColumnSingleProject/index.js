@@ -9,6 +9,7 @@ import ProjectNotes from '../ProjectNotes'
 class ColumnSingleProject extends Component{
 
   render() {
+    const { myProjects } = this.props
 
     const SearchBarEntry = {
       component: <SearchBar />,
@@ -34,7 +35,7 @@ class ColumnSingleProject extends Component{
 
     return(
       <div style = {mainStyle}>
-        <ProjectNotes />
+        <ProjectNotes pageId={this.props.pageId}/>
       </div>
     )
   }

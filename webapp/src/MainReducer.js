@@ -5,7 +5,8 @@ import {
   GET_PROJECTS,
   SET_MAKE_ACTIVE,
   UPDATE_PROJECT_STATUS,
-  SET_PROJECT_METADATA
+  SET_PROJECT_METADATA,
+  UPDATE_PROJECT_NOTES
 } from './actions.js'
 
 const initialState = {
@@ -67,6 +68,12 @@ export default function (state = initialState, {type, payload}) {
       return {
         ...state,
         myProjects: state.myProjects.map((entry, i) => i == payload[0] ? {...entry, project_status: payload[1]} : entry)
+      }
+    }
+    case UPDATE_PROJECT_NOTES: {
+      return {
+        ...state,
+        myProjects: state.myProjects.map((entry, i) => i == payload[1] ? {...entry, project_text: payload[0]} : entry)
       }
     }
     default:

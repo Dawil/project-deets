@@ -30,7 +30,7 @@ class SingleProject extends Component {
       <div style={wrapperStyle}>
         <div style={pageStyle}>
         <SidePanel/>
-        <ColumnSingleProject/>
+        <ColumnSingleProject pageId={this.props.match.params.id}/>
         <ColumnDetail />
         </div>
       </div>

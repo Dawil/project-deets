@@ -4,32 +4,50 @@ import styled from 'react-emotion';
 import { Link } from 'react-router-dom'
 import DetailPanelEntry from '../DetailPanelEntry'
 import { Form, TextArea } from 'semantic-ui-react'
-import { selectProject } from '../../actions.js'
+import { updateProjectNotes } from '../../actions.js'
 
 class ProjectNotes extends Component{
 
   constructor(){
     super()
     this.state = {
-      selected: null
+      selected: null,
+      index: '',
+      text: ''
     }
   }
 
-  fillBlanks = (currentRows) => {
-    let blankArray = []
-    let rowsToFill = 23 - currentRows
-    if (rowsToFill < 0) {
-      rowsToFill = 0
-    }
-    for (var i = 0; i < rowsToFill; i++) {
-      blankArray.push('a');
-    }
-    return blankArray
+  updateText = (e) => {
+    const { myProjects, updateProjectNotes, pageId } = this.props
+    console.log(e.target.value)
+    updateProjectNotes(e.target.value, this.getIndex(), pageId.replace('-',''))
+  }
+
+  getIndex = () => {
+    const { myProjects, updateProjectNotes, pageId } = this.props
+    let index
+    myProjects.map((entry, i) =>
+        (entry.project_number.substring(0,6) + '-' + entry.project_number.substring(6,8)) == pageId ? index = i : null
+      )
+    return index
+  }
+
+  getProjectEntry = () => {
+    const { myProjects, updateProjectNotes, pageId } = this.props
+    const entry = myProjects.filter(entry => (entry.project_number.substring(0,6) + '-' + entry.project_number.substring(6,8)) == pageId)
+    return entry
+  }
+
+  getText = () => {
+    const entry = this.getProjectEntry()
+    let text
+      entry[0].project_text == 'blankTextField' ? text = '' : text = entry[0].project_text
+    return text
   }
 
   render() {
 
-    const { searchData, selectedProject } = this.props
+    const { myProjects, pageId } = this.props
 
     const mainStyle = {
       display: 'block',
@@ -58,7 +76,7 @@ class ProjectNotes extends Component{
     }
 
     const textAreaStyle = {
-      height: '100%',
+      height: 'calc(100% - 50px)',
       width: '90%',
       resize: 'none',
       border: '0px solid black',
@@ -70,7 +88,16 @@ class ProjectNotes extends Component{
       <div style = {mainStyle}>
         <div style = {middleDivStyle} className='noscroll'>
           <Form style={formStyle}>
-            <TextArea autoHeight rows="40" style={textAreaStyle} placeholder='Notes...' />
+          {
+            myProjects[2] ?
+              <TextArea autoHeight rows="40"
+              style={textAreaStyle}
+              placeholder='Notes'
+              value={this.getText()}
+              onChange={this.updateText}
+              />
+            : null
+          }
           </Form>
         </div>
       </div>
@@ -80,10 +107,9 @@ class ProjectNotes extends Component{
 
 export default connect(
   state => ({
-    searchData: state.MainReducer.searchData,
-    selectedProject: state.MainReducer.selectedProject
+    myProjects: state.MainReducer.myProjects
   }),
   {
-    selectProject
+    updateProjectNotes
   }
 )(ProjectNotes)
