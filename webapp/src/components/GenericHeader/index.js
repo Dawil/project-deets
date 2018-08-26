@@ -76,7 +76,7 @@ class GenericHeader extends Component{
                 return (
                   <NavItem key={entry}>
                       <HeaderEntry>
-                      <Link to={entry.split(' ').join('_')} className='router-link'>{entry}</Link>
+                      <Link to={'/' + entry.split(' ').join('_')} className='router-link'>{entry}</Link>
                       </HeaderEntry>
                   </NavItem>
                 )

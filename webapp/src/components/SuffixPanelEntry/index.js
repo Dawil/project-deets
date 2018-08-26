@@ -15,11 +15,10 @@ class SuffixPanelEntry extends Component{
 
   selectProject = (e) => {
     const { selectProject, index, searchData } = this.props
-    console.log(index)
     this.setState({
       selected: e.target.id
     })
-    selectProject(e.target.id, e.target.innerHTML, searchData.value[0].Jobs[index])
+    selectProject(e.target.id, e.target.innerHTML, searchData.value[0].Jobs[index], index)
   }
 
   fillBlanks = (currentRows) => {
@@ -38,46 +37,9 @@ class SuffixPanelEntry extends Component{
 
     const { searchData, job, index } = this.props
 
-    const mainStyle = {
-      display: 'block',
-      height: '100%',
-      align: 'top'
-    }
-
-    const middleDivStyle = {
-      border: '0px solid black',
-      borderRadius: '25px',
-      width:'460px',
-      height: `${this.props.xzibitProps}`,
-      textAlign : 'center',
-      verticalAlign: 'top',
-      overflowX: 'hidden',
-      overflowY: 'scroll',
-      boxSizing: 'content-box'
-    }
-
-    const aEntryStyle = {
-      backgroundColor: 'rgb(72, 71, 85)',
-    }
-
-    const bEntryStyle = {
-      backgroundColor: 'rgb(43, 42, 56)',
-    }
-
     const entryStyle = [
       {backgroundColor: 'rgb(52, 58, 64, 0.95)'},
       {backgroundColor: 'rgb(33, 37, 41, 0.95)'},
-    ]
-
-    const blankEntryStyle = [
-      {
-        backgroundColor: 'rgb(52, 58, 64, 0.5)',
-        height: '20px',
-      },
-      {
-        backgroundColor: 'rgb(33, 37, 41, 0.5)',
-        height: '20px',
-      },
     ]
 
     const suffixEntryStyle = {
@@ -106,13 +68,6 @@ class SuffixPanelEntry extends Component{
         text-decoration: none;
       }
     `
-
-    const placeHolderStyle = {
-      width:'100%',
-      height: '20px',
-      display: 'inline-block',
-      color: 'rgb(255, 255, 255, 0.5)'
-    }
 
     return(
       <div onClick={this.selectProject} key={job.JobSuffix} style={entryStyle[index % entryStyle.length]}>

@@ -11,7 +11,7 @@ module.exports = {
   output: {
     filename: 'index.js',
     path: path.join(__dirname, 'dist'),
-    publicPath: './'
+    publicPath: '/'
   },
     module: {
     rules: [
@@ -71,11 +71,15 @@ module.exports = {
            name: 'description',
            content: 'description here'
          }
-       ]
+       ],
+       base: {
+         href: '/'
+       }
      }
    )
  ],
   devServer: {
     historyApiFallback: true,
+    contentBase: '/',
   }
 }

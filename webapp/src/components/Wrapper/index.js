@@ -39,7 +39,6 @@ class Wrapper extends Component {
         <div style={pageStyle}>
           <SidePanel/>
           <ColumnSimple />
-          <ColumnDivider />
           <ColumnDetail />
         </div>
       </div>

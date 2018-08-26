@@ -4,9 +4,9 @@ import styled from 'react-emotion';
 import { Link } from 'react-router-dom'
 import SearchBar from '../SearchBar'
 import ColumnSimpleEntry from '../ColumnSimpleEntry'
-import DetialPanel from '../DetailPanel'
+import ProjectNotes from '../ProjectNotes'
 
-class ColumnDetail extends Component{
+class ColumnSingleProject extends Component{
 
   render() {
 
@@ -34,7 +34,7 @@ class ColumnDetail extends Component{
 
     return(
       <div style = {mainStyle}>
-        <DetialPanel />
+        <ProjectNotes />
       </div>
     )
   }
@@ -42,4 +42,4 @@ class ColumnDetail extends Component{
 
 export default connect(
   null, null
-)(ColumnDetail)
+)(ColumnSingleProject)

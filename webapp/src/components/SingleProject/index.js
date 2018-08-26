@@ -2,24 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SidePanel from '../SidePanel';
 import ColumnEntry from '../ColumnEntry';
-import ColumnProjects from '../ColumnProjects';
+import ColumnSingleProject from '../ColumnSingleProject';
 import ColumnDivider from '../ColumnDivider';
 import ColumnDetail from '../ColumnDetail';
+import ProjectNotes from '../ProjectNotes'
 
-class MyProjects extends Component {
+class SingleProject extends Component {
 
 
   render() {
-
-    const headerContent = {
-      icon: 'https://s3-ap-southeast-2.amazonaws.com/buildingperformance.arup.digital/bpdb.png',
-      name: 'Project Deets',
-      content: [
-        'Lookup',
-        'My projects',
-        'Hotkeys'
-      ]
-    }
 
     const wrapperStyle = {
       display: 'inline-block',
@@ -39,7 +30,7 @@ class MyProjects extends Component {
       <div style={wrapperStyle}>
         <div style={pageStyle}>
         <SidePanel/>
-        <ColumnProjects />
+        <ColumnSingleProject/>
         <ColumnDetail />
         </div>
       </div>
@@ -49,4 +40,4 @@ class MyProjects extends Component {
 
 export default connect(
   null,null
-)(MyProjects)
+)(SingleProject)

@@ -4,6 +4,7 @@ export const ADD_PROJECT = 'ADD_PROJECT'
 export const GET_PROJECTS = 'GET_PROJECTS'
 export const SET_MAKE_ACTIVE = 'SET_MAKE_ACTIVE'
 export const UPDATE_PROJECT_STATUS = 'UPDATE_PROJECT_STATUS'
+export const SET_PROJECT_METADATA = 'SET_PROJECT_METADATA'
 
 export const searchProject = (type, value) => dispatch => {
   let url = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/search_project?type=' + type + '&value=' + value
@@ -68,16 +69,20 @@ export const getProjects = () => dispatch => {
   })
 }
 
-export const selectProject = (jobNumber, jobName, jobData) => dispatch => {
+export const selectProject = (jobNumber, jobName, jobData, projectindex) => dispatch => {
   let url = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/search_project?type=AccountingCentreCode' + '&value=' + jobData.AccountingCentreCode
   let url1 = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/search_project?type=GroupCode' + '&value=' + jobData.GroupCode
 
   dispatch({
     type: SELECT_PROJECT,
-    payload: [jobNumber, jobName]
+      payload: [jobNumber, jobName]
+    })
+  fetch(url).then(response => response.json()).then(response => {
+    dispatch({ type: SET_PROJECT_METADATA,payload: [projectindex, 'Accounting Centre', response.value[0].AccountingCentreName] })
   })
-  fetch(url).then(response => response.json()).then(response => { console.log(response.value[0].AccountingCentreName) })
-  fetch(url1).then(response => response.json()).then(response => { console.log(response.value[0].GroupName) })
+  fetch(url1).then(response => response.json()).then(response => {
+    dispatch({ type: SET_PROJECT_METADATA,payload: [projectindex, 'Group', response.value[0].GroupName] })
+  })
 }
 
 export const setMakeActive = boolean => ({

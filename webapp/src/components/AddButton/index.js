@@ -24,7 +24,7 @@ class AddButton extends Component{
     return(
       <div>
         {
-          selectedProject ?
+          selectedProject.jobName ?
           <Button style = {buttonStyle} circular onClick={this._addProject}>Add</Button>
           : null
         }

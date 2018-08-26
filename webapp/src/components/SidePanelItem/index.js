@@ -35,9 +35,13 @@ class SidePanelItem extends Component{
       color: 'rgb(255, 255, 255, 0.5)'
     }
 
+    const linkStyle = {
+      color: 'rgb(255, 255, 255, 0.5)'
+    }
+
     return(
       <DivWithHover style = {mainStyle}>
-        {projectNumber} - {projectName}
+        <Link to={"/Project/" + projectNumber} style={linkStyle}>{projectNumber} - {projectName}</Link>
       </DivWithHover>
     )
   }

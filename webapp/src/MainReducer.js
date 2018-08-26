@@ -4,14 +4,21 @@ import {
   ADD_PROJECT,
   GET_PROJECTS,
   SET_MAKE_ACTIVE,
-  UPDATE_PROJECT_STATUS
+  UPDATE_PROJECT_STATUS,
+  SET_PROJECT_METADATA
 } from './actions.js'
 
 const initialState = {
   searchData: null,
-  selectedProject: null,
+  selectedProject: {
+    'Job Number': null,
+    'Name': null,
+    'Accounting Centre': '',
+    'Group': ''
+  },
   myProjects: [],
-  makeActive: true
+  makeActive: true,
+  detailedInfo: []
 }
 
 export default function (state = initialState, {type, payload}) {
@@ -25,7 +32,7 @@ export default function (state = initialState, {type, payload}) {
     case SELECT_PROJECT: {
       return {
         ...state,
-        selectedProject: {'jobNumber':payload[0], 'jobName':payload[1]}
+        selectedProject: {...state.selectedProject, 'Job Number': (payload[0].substring(0,6) + '-' + payload[0].substring(6,8)), 'Name':payload[1]}
       }
     }
     case ADD_PROJECT: {
@@ -50,13 +57,16 @@ export default function (state = initialState, {type, payload}) {
         makeActive: payload
       }
     }
+    case SET_PROJECT_METADATA: {
+      return {
+        ...state,
+        selectedProject: {...state.selectedProject, [payload[1]]: payload[2]}
+      }
+    }
     case UPDATE_PROJECT_STATUS: {
       return {
         ...state,
-        myProjects: state.myProjects.map(
-            (entry, i) => i == payload[0] ? {...entry, project_status: payload[1]}
-                                    : entry
-        )
+        myProjects: state.myProjects.map((entry, i) => i == payload[0] ? {...entry, project_status: payload[1]} : entry)
       }
     }
     default:

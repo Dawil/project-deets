@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import GenericHeader from '../GenericHeader'
 import Wrapper from '../Wrapper'
 import MyProjects from '../MyProjects'
-import { Switch, Route, Router,  Link, withRouter } from 'react-router-dom'
+import SingleProject from '../SingleProject'
+import { Switch, Route, Router, Link, withRouter } from 'react-router-dom'
 import { getProjects } from '../../actions.js'
 
 class App extends Component {
@@ -27,10 +28,14 @@ class App extends Component {
     return (
       <div>
         <GenericHeader headerContent = {headerContent}/>
+        <Switch>
         <Route exact path="/" component={Wrapper}/>
-        <Route exact path="/Lookup" component={Wrapper}/>
-        <Route exact path="/My_projects" component={MyProjects}/>
-        <Route exact path="/Hotkeys" component={Wrapper}/>
+        <Route path="/Lookup" component={Wrapper}/>
+        <Route path="/Project/:id" component={SingleProject}/>
+        <Route path="/My_projects" component={MyProjects}/>
+        <Route path="/Hotkeys" component={Wrapper}/>
+        <Route path="*" component={Wrapper} />
+        </Switch>
       </div>
     );
   }

@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'react-emotion';
 import { Link } from 'react-router-dom'
-import SuffixPanelEntry from '../SuffixPanelEntry'
+import DetailPanelEntry from '../DetailPanelEntry'
 import { selectProject } from '../../actions.js'
 
-class SuffixPanel extends Component{
+class DetailPanel extends Component{
 
   constructor(){
     super()
@@ -16,7 +16,7 @@ class SuffixPanel extends Component{
 
   fillBlanks = (currentRows) => {
     let blankArray = []
-    let rowsToFill = 20 - currentRows
+    let rowsToFill = 23 - currentRows
     if (rowsToFill < 0) {
       rowsToFill = 0
     }
@@ -28,19 +28,21 @@ class SuffixPanel extends Component{
 
   render() {
 
-    const { searchData } = this.props
+    const { searchData, selectedProject } = this.props
 
     const mainStyle = {
       display: 'block',
       height: '100%',
-      align: 'top'
+      align: 'top',
+      height: '693px',
+      margin: '20px '
     }
 
     const middleDivStyle = {
       border: '0px solid black',
       borderRadius: '25px',
       width:'460px',
-      height: `${this.props.xzibitProps}`,
+      height: '100%',
       textAlign : 'center',
       verticalAlign: 'top',
       overflowX: 'hidden',
@@ -51,18 +53,18 @@ class SuffixPanel extends Component{
     const blankEntryStyle = [
       {
         backgroundColor: 'rgb(52, 58, 64, 0.5)',
-        height: '20px',
+        height: '30px',
       },
       {
         backgroundColor: 'rgb(33, 37, 41, 0.5)',
-        height: '20px',
+        height: '30px',
       },
     ]
 
     const DivWithHover = styled('div')`
       cursor: pointer;
       width: 80%;
-      height:  20px;
+      height:  30px;
       display: inline-block;
       color: rgb(255, 255, 255, 0.5);
 
@@ -74,7 +76,7 @@ class SuffixPanel extends Component{
 
     const placeHolderStyle = {
       width:'100%',
-      height: '20px',
+      height: '30px',
       display: 'inline-block',
       color: 'rgb(255, 255, 255, 0.5)'
     }
@@ -83,15 +85,15 @@ class SuffixPanel extends Component{
       <div style = {mainStyle}>
         <div style = {middleDivStyle} className='noscroll'>
           {
-            searchData ?
-              searchData.value[0].Jobs.map((job, index) =>
-                <SuffixPanelEntry key={job.JobSuffix} index={index} job={job} />
+            true ?
+              Object.entries(selectedProject).map((detail, index) =>
+              <DetailPanelEntry key={detail[0]} detail={detail} index={index}/>
               )
             : null
           }
           {
-            searchData ?
-              this.fillBlanks(searchData.value[0].Jobs.length).map((item, index) =>
+            true  ?
+              this.fillBlanks(Object.entries(selectedProject).length).map((item, index) =>
                 <div key={index+'outer'} style={blankEntryStyle[index % blankEntryStyle.length]}>
                   <div key={index+'inner'} style={placeHolderStyle}></div>
                 </div>
@@ -106,9 +108,10 @@ class SuffixPanel extends Component{
 
 export default connect(
   state => ({
-    searchData: state.MainReducer.searchData
+    searchData: state.MainReducer.searchData,
+    selectedProject: state.MainReducer.selectedProject
   }),
   {
     selectProject
   }
-)(SuffixPanel)
+)(DetailPanel)
