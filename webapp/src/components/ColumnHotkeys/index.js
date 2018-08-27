@@ -4,11 +4,17 @@ import styled from 'react-emotion';
 import { Link } from 'react-router-dom'
 import SearchBar from '../SearchBar'
 import ColumnSimpleEntry from '../ColumnSimpleEntry'
-import DetailPanel from '../DetailPanel'
+import GenericButton from '../GenericButton'
+import HotkeyPanel from '../HotkeyPanel'
 
-class ColumnDetail extends Component{
+class ColumnHotkeys extends Component{
+
+  downLoadHotkeys = () => {
+    console.log('downloaded')
+  }
 
   render() {
+    const { myProjects } = this.props
 
     const SearchBarEntry = {
       component: <SearchBar />,
@@ -26,15 +32,20 @@ class ColumnDetail extends Component{
       overflow: 'auto',
     }
 
-    const SampleItem = styled('div')`
-      height: 40px;
-      padding: 0.3125rem;
-      display: inline-block;
-    `
+    const middleStyle = {
+      display: 'block',
+      align: 'top',
+      margin: '20px '
+    }
 
     return(
-      <div style = {mainStyle}>
-        <DetailPanel />
+      <div style = {mainStyle} >
+        <div style = {middleStyle} >
+          <HotkeyPanel/>
+          <div onClick={this.downLoadHotkeys}>
+            <GenericButton label="get file"/>
+          </div>
+        </div>
       </div>
     )
   }
@@ -42,4 +53,4 @@ class ColumnDetail extends Component{
 
 export default connect(
   null, null
-)(ColumnDetail)
+)(ColumnHotkeys)

@@ -4,6 +4,7 @@ import GenericHeader from '../GenericHeader'
 import Wrapper from '../Wrapper'
 import MyProjects from '../MyProjects'
 import SingleProject from '../SingleProject'
+import Hotkeys from '../Hotkeys'
 import { Switch, Route, Router, Link, withRouter } from 'react-router-dom'
 import { getProjects } from '../../actions.js'
 
@@ -33,7 +34,7 @@ class App extends Component {
         <Route path="/Lookup" component={Wrapper}/>
         <Route path="/Project/:id" component={SingleProject}/>
         <Route path="/My_projects" component={MyProjects}/>
-        <Route path="/Hotkeys" component={Wrapper}/>
+        <Route path="/Hotkeys" component={Hotkeys}/>
         <Route path="*" component={Wrapper} />
         </Switch>
       </div>
