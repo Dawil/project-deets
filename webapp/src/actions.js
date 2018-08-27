@@ -105,13 +105,16 @@ export const updateProjectStatus = (projectindex, number, value) => dispatch => 
 }
 
 function expensiveOperation(text, number) {
-  let value
-  text == '' ? value = 'blankTextField' : value
+  let value = text
+  if (text == '') {
+    value = 'blankTextField'
+  }
+  console.log('value', value)
   let url = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/update-project?project_number=' +
-  number + '&project_value=' + value + '&update_type=project_text'
+  number + '&project_value=' + encodeURIComponent(value) + '&update_type=project_text'
   fetch(url)
 }
-const thing = debounce(expensiveOperation, 1000)
+const thing = debounce(expensiveOperation, 300)
 
 export const updateProjectNotes = (text, index, number) => dispatch => {
 

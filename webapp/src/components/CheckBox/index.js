@@ -32,7 +32,7 @@ class CheckBox extends Component{
     return(
       <HijackNestedStyles>
       {
-        selectedProject.jobName ?
+        selectedProject.Name ?
         <Checkbox
         label='Make active project'
         checked={makeActive}

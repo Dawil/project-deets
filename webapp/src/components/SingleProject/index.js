@@ -19,12 +19,12 @@ class SingleProject extends Component {
     }
 
     const pageStyle = {
-      height: '800px',
+      minHeight: '800px',
+      height: 'calc(100vh - 56px)',
       backgroundColor: '#435a77',
       display: 'inline-block',
       width: 'calc(100%)',
     }
-
 
     return (
       <div style={wrapperStyle}>
