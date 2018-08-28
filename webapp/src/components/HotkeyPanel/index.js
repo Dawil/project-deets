@@ -5,26 +5,15 @@ import { Link } from 'react-router-dom'
 import DetailPanelEntry from '../DetailPanelEntry'
 import { selectProject } from '../../actions.js'
 import { Dropdown } from 'semantic-ui-react'
+import HotkeyPanelEntry from '../HotkeyPanelEntry'
 
-class DetailPanel extends Component{
+class HotkeyPanel extends Component{
 
   constructor(){
     super()
     this.state = {
       selected: ''
     }
-  }
-
-  fillBlanks = (currentRows) => {
-    let blankArray = []
-    let rowsToFill = 10 - currentRows
-    if (rowsToFill < 0) {
-      rowsToFill = 0
-    }
-    for (var i = 0; i < rowsToFill; i++) {
-      blankArray.push('a');
-    }
-    return blankArray
   }
 
   render() {
@@ -37,70 +26,31 @@ class DetailPanel extends Component{
       width:'460px',
       textAlign : 'center',
       verticalAlign: 'top',
-      boxSizing: 'content-box'
+      boxSizing: 'content-box',
     }
 
-    const blankEntryStyle = [
-      {
-        backgroundColor: 'rgb(52, 58, 64, 0.5)',
-        height: '30px',
-      },
-      {
-        backgroundColor: 'rgb(33, 37, 41, 0.5)',
-        height: '30px',
-      },
-    ]
-
-    const DivWithHover = styled('div')`
-      cursor: pointer;
-      width: 80%;
-      height:  30px;
-      display: inline-block;
-      color: rgb(255, 255, 255, 0.5);
-
-      &:hover {
-        color: rgba(255, 255, 255, 0.75) !important;
-        text-decoration: none;
-      }
-    `
-
-    const placeHolderStyle = {
-      width:'100%',
-      height: '30px',
-      display: 'inline-block',
-      color: 'rgb(255, 255, 255, 0.5)'
-    }
-
-    const dropdownStyle = {
-      width: '150px',
-      hieght: '10px',
-      backgroundColor: 'rgb(52, 58, 64, 0.5)',
-      padding: '0px'
-    }
-
-    const dropdownOptions = [
-      { key: 'a', value: '000000-00', text: '000000-00' },
-      { key: 'b', value: '000000-00', text: '000000-00' },
-      { key: 'c', value: '000000-00', text: '000000-00' },
-      { key: 'd', value: '000000-00', text: '000000-00' },
-     ]
+     const hotkeyOptions = [
+       { key: '1', value: 'ctrl + 1', text: 'ctrl + 1' },
+       { key: '2', value: 'ctrl + 2', text: 'ctrl + 2' },
+       { key: '3', value: 'ctrl + 3', text: 'ctrl + 3' },
+       { key: '4', value: 'ctrl + 4', text: 'ctrl + 4' },
+       { key: '5', value: 'ctrl + 5', text: 'ctrl + 5' },
+       { key: '6', value: 'ctrl + 6', text: 'ctrl + 6' },
+       { key: '7', value: 'ctrl + 7', text: 'ctrl + 7' },
+       { key: '8', value: 'ctrl + 8', text: 'ctrl + 8' },
+       { key: '9', value: 'ctrl + 9', text: 'ctrl + 9' },
+       { key: '0', value: 'ctrl + 0', text: 'ctrl + 0' }
+      ]
 
     return(
         <div style = {middleDivStyle} className='noscroll'>
           {
             true  ?
-              this.fillBlanks(0).map((item, index) =>
-                <div key={index+'outer'} style={blankEntryStyle[index % blankEntryStyle.length]}>
-                  <div key={index+'inner'} style={placeHolderStyle}></div>
-                </div>
+              hotkeyOptions.map((item, index) =>
+                <HotkeyPanelEntry key={item.key} index={index} />
               )
             : null
           }
-          <div style={blankEntryStyle[1 % blankEntryStyle.length]}>
-            <div style={placeHolderStyle}>
-              <Dropdown style={dropdownStyle} placeholder='Select' fluid search selection options={dropdownOptions} />
-            </div>
-          </div>
         </div>
     )
   }
@@ -114,4 +64,4 @@ export default connect(
   {
     selectProject
   }
-)(DetailPanel)
+)(HotkeyPanel)

@@ -6,7 +6,8 @@ import {
   SET_MAKE_ACTIVE,
   UPDATE_PROJECT_STATUS,
   SET_PROJECT_METADATA,
-  UPDATE_PROJECT_NOTES
+  UPDATE_PROJECT_NOTES,
+  CHANGE_HOTKEY_DROPDOWN
 } from './actions.js'
 
 const initialState = {
@@ -19,7 +20,19 @@ const initialState = {
   },
   myProjects: [],
   makeActive: true,
-  detailedInfo: []
+  detailedInfo: [],
+  hotKeyLists: [
+      { 'project': '', 'hotkey': 'ctrl + 1' },
+      { 'project': '', 'hotkey': 'ctrl + 2' },
+      { 'project': '', 'hotkey': 'ctrl + 3' },
+      { 'project': '', 'hotkey': 'ctrl + 4' },
+      { 'project': '', 'hotkey': 'ctrl + 5' },
+      { 'project': '', 'hotkey': 'ctrl + 6' },
+      { 'project': '', 'hotkey': 'ctrl + 7' },
+      { 'project': '', 'hotkey': 'ctrl + 8' },
+      { 'project': '', 'hotkey': 'ctrl + 9' },
+      { 'project': '', 'hotkey': 'ctrl + 0' }
+  ]
 }
 
 export default function (state = initialState, {type, payload}) {
@@ -40,8 +53,8 @@ export default function (state = initialState, {type, payload}) {
       return {
         ...state,
         myProjects: [...state.myProjects, {
-          'project_name': payload[0].jobName,
-          'project_number': payload[0].jobNumber,
+          'project_name': payload[0]['Name'],
+          'project_number': payload[0]['Job Number'],
           'project_status': payload[1]
         }]
       }
@@ -74,6 +87,12 @@ export default function (state = initialState, {type, payload}) {
       return {
         ...state,
         myProjects: state.myProjects.map((entry, i) => i == payload[1] ? {...entry, project_text: payload[0]} : entry)
+      }
+    }
+    case CHANGE_HOTKEY_DROPDOWN: {
+      return {
+        ...state,
+        hotKeyLists: state.hotKeyLists.map((entry, i) => i == payload[1] ? {...entry, [payload[2]]: payload[0]} : entry)
       }
     }
     default:

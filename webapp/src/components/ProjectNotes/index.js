@@ -26,14 +26,14 @@ class ProjectNotes extends Component{
     const { myProjects, updateProjectNotes, pageId } = this.props
     let index
     myProjects.map((entry, i) =>
-        (entry.project_number.substring(0,6) + '-' + entry.project_number.substring(6,8)) == pageId ? index = i : null
+        (entry.project_number) == pageId ? index = i : null
       )
     return index
   }
 
   getProjectEntry = () => {
     const { myProjects, updateProjectNotes, pageId } = this.props
-    const entry = myProjects.filter(entry => (entry.project_number.substring(0,6) + '-' + entry.project_number.substring(6,8)) == pageId)
+    const entry = myProjects.filter(entry => (entry.project_number) == pageId)
     return entry
   }
 

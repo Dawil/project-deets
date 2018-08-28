@@ -8,6 +8,7 @@ export const SET_MAKE_ACTIVE = 'SET_MAKE_ACTIVE'
 export const UPDATE_PROJECT_STATUS = 'UPDATE_PROJECT_STATUS'
 export const SET_PROJECT_METADATA = 'SET_PROJECT_METADATA'
 export const UPDATE_PROJECT_NOTES = 'UPDATE_PROJECT_NOTES'
+export const CHANGE_HOTKEY_DROPDOWN = 'CHANGE_HOTKEY_DROPDOWN'
 
 export const searchProject = (type, value) => dispatch => {
   let url = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/search_project?type=' + type + '&value=' + value
@@ -40,8 +41,8 @@ export const addProject = (jobDetails, makeActive) => dispatch => {
   let isProjectActive
   makeActive ? isProjectActive = 'active' : isProjectActive = 'inactive'
   let url = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/add-project' +
-  '?project_number=' + jobDetails.jobNumber +
-  '&project_name=' + jobDetails.jobName +
+  '?project_number=' + jobDetails['Job Number'] +
+  '&project_name=' + jobDetails['Name'] +
   '&make_active=' + isProjectActive
   let data
   fetch(url)
@@ -125,3 +126,8 @@ export const updateProjectNotes = (text, index, number) => dispatch => {
     payload: [text, index]
   })
 }
+
+export const changeHotkeyDropdown = (value, index, dropdown) => ({
+  type: CHANGE_HOTKEY_DROPDOWN,
+  payload: [value, index, dropdown]
+})

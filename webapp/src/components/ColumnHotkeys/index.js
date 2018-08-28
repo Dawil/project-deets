@@ -6,10 +6,21 @@ import SearchBar from '../SearchBar'
 import ColumnSimpleEntry from '../ColumnSimpleEntry'
 import GenericButton from '../GenericButton'
 import HotkeyPanel from '../HotkeyPanel'
+import { autoHotKeyGenerate } from '../../autoHotKeyGenerate.js'
 
 class ColumnHotkeys extends Component{
 
   downLoadHotkeys = () => {
+    let element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(autoHotKeyGenerate()));
+    element.setAttribute('download', 'filename.ahk');
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
     console.log('downloaded')
   }
 

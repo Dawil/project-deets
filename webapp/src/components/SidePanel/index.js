@@ -30,7 +30,7 @@ class SidePanel extends Component{
         {
           myProjects ?
             myProjects.map( item =>
-              <SidePanelItem key={item.project_number.substring(0,6) + '-' + item.project_number.substring(6,8)} projectNumber={item.project_number.substring(0,6) + '-' + item.project_number.substring(6,8)} projectName={item.project_name}/>
+              <SidePanelItem key={item.project_number} projectNumber={item.project_number} projectName={item.project_name}/>
             )
           : null
         }

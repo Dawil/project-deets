@@ -34,7 +34,7 @@ class DetailPanel extends Component{
       display: 'block',
       height: '100%',
       align: 'top',
-      height: '693px',
+      height: '690px',
       margin: '20px '
     }
 
@@ -46,7 +46,7 @@ class DetailPanel extends Component{
       textAlign : 'center',
       verticalAlign: 'top',
       overflowX: 'hidden',
-      overflowY: 'scroll',
+      overflowY: 'hidden',
       boxSizing: 'content-box'
     }
 
