@@ -76,6 +76,8 @@ export const getProjects = () => dispatch => {
 export const selectProject = (jobNumber, jobName, jobData, projectindex) => dispatch => {
   let url = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/search_project?type=AccountingCentreCode' + '&value=' + jobData.AccountingCentreCode
   let url1 = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/search_project?type=GroupCode' + '&value=' + jobData.GroupCode
+  let url2 = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/search_project?type=RegionCode' + '&value=' + jobData.RegionCode
+  let url3 = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/search_project?type=PracticeCode' + '&value=' + jobData.PracticeCode
 
   dispatch({
     type: SELECT_PROJECT,
@@ -86,6 +88,12 @@ export const selectProject = (jobNumber, jobName, jobData, projectindex) => disp
   })
   fetch(url1).then(response => response.json()).then(response => {
     dispatch({ type: SET_PROJECT_METADATA,payload: [projectindex, 'Group', response.value[0].GroupName] })
+  })
+  fetch(url2).then(response => response.json()).then(response => {
+    dispatch({ type: SET_PROJECT_METADATA,payload: [projectindex, 'Region', response.value[0].RegionName] })
+  })
+  fetch(url3).then(response => response.json()).then(response => {
+    dispatch({ type: SET_PROJECT_METADATA,payload: [projectindex, 'Practice', response.value[0].PracticeName] })
   })
 }
 
