@@ -1,4 +1,5 @@
 import {
+  TOGGLE_SEARCHING,
   SEARCH_PROJECT,
   SELECT_PROJECT,
   ADD_PROJECT,
@@ -11,6 +12,7 @@ import {
 } from './actions.js'
 
 const initialState = {
+  searchStatus: false,
   searchData: null,
   selectedProject: {
     'Job Number': null,
@@ -37,10 +39,17 @@ const initialState = {
 
 export default function (state = initialState, {type, payload}) {
   switch (type) {
+    case TOGGLE_SEARCHING: {
+      return {
+        ...state,
+        searchStatus: payload
+      }
+    }
     case SEARCH_PROJECT: {
       return {
         ...state,
-        searchData: payload
+        searchData: payload,
+        searchStatus: 'searched'
       }
     }
     case SELECT_PROJECT: {

@@ -1,5 +1,6 @@
 var debounce = require('debounce');
 
+export const TOGGLE_SEARCHING = 'TOGGLE_SEARCHING'
 export const SEARCH_PROJECT = 'SEARCH_PROJECT'
 export const SELECT_PROJECT = 'SELECT_PROJECT'
 export const ADD_PROJECT = 'ADD_PROJECT'
@@ -11,6 +12,10 @@ export const UPDATE_PROJECT_NOTES = 'UPDATE_PROJECT_NOTES'
 export const CHANGE_HOTKEY_DROPDOWN = 'CHANGE_HOTKEY_DROPDOWN'
 
 export const searchProject = (type, value) => dispatch => {
+  dispatch({
+    type: TOGGLE_SEARCHING,
+    payload: 'searching'
+  })
   let url = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/search_project?type=' + type + '&value=' + value
   let data
   fetch(url)

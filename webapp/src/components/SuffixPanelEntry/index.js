@@ -42,6 +42,13 @@ class SuffixPanelEntry extends Component{
       {backgroundColor: 'rgb(33, 37, 41, 0.95)'},
     ]
 
+    const edgeStyle = {
+      width:'5%',
+      height: '20px',
+      display: 'inline-block',
+      color: 'rgb(255, 255, 255)'
+    }
+
     const suffixEntryStyle = {
       width:'10%',
       height: '20px',
@@ -71,9 +78,10 @@ class SuffixPanelEntry extends Component{
 
     return(
       <div onClick={this.selectProject} key={job.JobSuffix} style={entryStyle[index % entryStyle.length]}>
+        <div style={edgeStyle} />
         <div style={suffixEntryStyle} key={job.JobSuffix} id={job.JobCode}>{job.JobSuffix}</div>
-        <div style={AccountingCentreCodeEntryStyle} key={job.AccountingCentreCode} id={job.JobCode}>{job.AccountingCentreCode}</div>
         <DivWithHover key={job.JobNameShort} id={job.JobCode}>{job.JobNameShort}</DivWithHover>
+        <div style={edgeStyle} />
       </div>
     )
   }
