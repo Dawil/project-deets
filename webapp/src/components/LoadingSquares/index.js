@@ -30,13 +30,13 @@ class LoadingSquares extends Component{
     return(
       <div style={loadingContentMiddleStyle}>
         <div style={loadingSquareContainer}>
-          <LoadingSquare startTime={0}/>
+          <LoadingSquare startTime={0} start={this.props.start}/>
         </div>
         <div style={loadingSquareContainer}>
-          <LoadingSquare startTime={250}/>
+          <LoadingSquare startTime={250} start={this.props.start}/>
         </div>
         <div style={loadingSquareContainer}>
-          <LoadingSquare startTime={500}/>
+          <LoadingSquare startTime={500} start={this.props.start}/>
         </div>
       </div>
     )

@@ -153,7 +153,7 @@ class SuffixPanel extends Component{
                 <div style={loadingSpacerStyle}></div>
                 <div style={loadingContentStyle}>
                   <div style={loadingContentSpacerStyle} />
-                    <LoadingSquares startTime={1000} />
+                    <LoadingSquares start={(searchStatus == 'searching')} />
                   <div style={loadingContentSpacerStyle} />
                 </div>
                 <div style={loadingSpacerStyle}></div>

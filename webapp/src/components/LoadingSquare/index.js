@@ -22,10 +22,12 @@ class LoadingSquare extends Component{
   }
 
   playAnimations = () => {
-    setTimeout(() => {
-      this.setState({loading: true})
-      this.playAnimations()
-    }, 1500);
+    if(this.props.start) {
+      setTimeout(() => {
+          this.forceUpdate()
+          this.playAnimations()
+      }, 1500);
+    }
   }
 
   render() {
