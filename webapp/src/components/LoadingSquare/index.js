@@ -23,6 +23,7 @@ class LoadingSquare extends Component{
 
   playAnimations = () => {
     if(this.props.start) {
+      console.log(this.props.start)
       setTimeout(() => {
           this.forceUpdate()
           this.playAnimations()
@@ -57,5 +58,7 @@ class LoadingSquare extends Component{
 }
 
 export default connect(
-  null , null
+  state => ({
+    searchStatus: state.MainReducer.searchStatus
+  }), null
 )(LoadingSquare)

@@ -11,11 +11,11 @@ import { getProjects } from '../../actions.js'
 class App extends Component {
 
   componentDidMount() {
-    this.props.getProjects()
+    const { auth } = this.props
+    this.props.getProjects(auth)
   }
 
   render() {
-
     const headerContent = {
       icon: 'https://s3-ap-southeast-2.amazonaws.com/buildingperformance.arup.digital/bpdb.png',
       name: 'Project Deets',

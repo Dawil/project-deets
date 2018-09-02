@@ -60,8 +60,9 @@ export const addProject = (jobDetails, makeActive) => dispatch => {
   })
 }
 
-export const getProjects = () => dispatch => {
-  let url = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/get-project'
+export const getProjects = (authObject) => dispatch => {
+  let url = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/get-project?jwt='
+  + authObject.token + '&accesstoken=' + authObject.accessToken
   let data = []
   fetch(url)
   .then(response => response.json())
