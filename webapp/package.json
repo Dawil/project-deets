@@ -26,6 +26,7 @@
     "jsonwebtoken": "^8.1.0",
     "lodash.debounce": "^4.0.8",
     "npm": "^5.8.0",
+    "react-authenticate": "git+https://github.com/ArupAus/react-authenticate.git#v3.0.1",
     "react-emotion": "^9.1.2",
     "react-modal": "^3.1.10",
     "react-motion": "^0.5.2",

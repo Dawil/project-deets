@@ -6,7 +6,7 @@ var app = express();
 var config = require('./webpack.config.babel.js');
 var history = require('connect-history-api-fallback');
 var compiler = webpack(config);
-var PORT = 3001;
+var PORT = 3000;
 
 app.use(history())
 app.use(webpackDevMiddleware(compiler))
