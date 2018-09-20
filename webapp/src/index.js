@@ -75,10 +75,10 @@ ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <AuthProvider
-        title="APM (Arup Project Manager)"
+        title="Arup Project Manager"
         clientId="A1ib6vpGvP63H8ZoyVR62ZFE1NQzJ8V7"
         domain="arupdigital.au.auth0.com"
-        callbackUrl='http://localhost:3000/callback'
+        callbackUrl='https://apm.arup.digital'
         options={auth0Options}
       >
         <ConnectedAuthWall />

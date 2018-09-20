@@ -8,10 +8,12 @@ import {
   UPDATE_PROJECT_STATUS,
   SET_PROJECT_METADATA,
   UPDATE_PROJECT_NOTES,
-  CHANGE_HOTKEY_DROPDOWN
+  CHANGE_HOTKEY_DROPDOWN,
+  ADD_AUTH
 } from './actions.js'
 
 const initialState = {
+  authObject: null,
   searchStatus: false,
   searchData: null,
   selectedProject: {
@@ -102,6 +104,12 @@ export default function (state = initialState, {type, payload}) {
       return {
         ...state,
         hotKeyLists: state.hotKeyLists.map((entry, i) => i == payload[1] ? {...entry, [payload[2]]: payload[0]} : entry)
+      }
+    }
+    case ADD_AUTH: {
+      return {
+        ...state,
+        authObject: payload
       }
     }
     default:

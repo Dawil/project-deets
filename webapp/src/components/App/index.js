@@ -6,13 +6,15 @@ import MyProjects from '../MyProjects'
 import SingleProject from '../SingleProject'
 import Hotkeys from '../Hotkeys'
 import { Switch, Route, Router, Link, withRouter } from 'react-router-dom'
-import { getProjects } from '../../actions.js'
+import { getProjects, addAuth } from '../../actions.js'
 
 class App extends Component {
 
   componentDidMount() {
-    const { auth } = this.props
+    const { auth, addAuth } = this.props
+    console.log(auth)
     this.props.getProjects(auth)
+    addAuth(auth)
   }
 
   render() {
@@ -45,6 +47,7 @@ class App extends Component {
 export default withRouter(connect(
   null,
   {
-    getProjects
+    getProjects,
+    addAuth
   }
 )(App))

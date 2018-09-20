@@ -8,8 +8,8 @@ import { addProject } from '../../actions.js'
 class AddButton extends Component{
 
   _addProject = () => {
-    const { selectedProject, addProject, makeActive } = this.props
-    addProject(selectedProject, makeActive)
+    const { selectedProject, addProject, makeActive, authObject } = this.props
+    addProject(selectedProject, makeActive, authObject)
   }
 
   render() {
@@ -36,7 +36,8 @@ class AddButton extends Component{
 export default connect(
   state => ({
     selectedProject: state.MainReducer.selectedProject,
-    makeActive: state.MainReducer.makeActive
+    makeActive: state.MainReducer.makeActive,
+    authObject: state.MainReducer.authObject
   }),
   {
     addProject

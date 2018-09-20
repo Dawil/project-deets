@@ -23,7 +23,6 @@ class LoadingSquare extends Component{
 
   playAnimations = () => {
     if(this.props.start) {
-      console.log(this.props.start)
       setTimeout(() => {
           this.forceUpdate()
           this.playAnimations()

@@ -10,6 +10,8 @@ export const UPDATE_PROJECT_STATUS = 'UPDATE_PROJECT_STATUS'
 export const SET_PROJECT_METADATA = 'SET_PROJECT_METADATA'
 export const UPDATE_PROJECT_NOTES = 'UPDATE_PROJECT_NOTES'
 export const CHANGE_HOTKEY_DROPDOWN = 'CHANGE_HOTKEY_DROPDOWN'
+export const ADD_AUTH = 'ADD_AUTH'
+
 
 export const searchProject = (type, value) => dispatch => {
   dispatch({
@@ -42,7 +44,7 @@ export const searchProject = (type, value) => dispatch => {
   })
 }
 
-export const addProject = (jobDetails, makeActive) => dispatch => {
+export const addProject = (jobDetails, makeActive, authObject) => dispatch => {
   let isProjectActive
   makeActive ? isProjectActive = 'active' : isProjectActive = 'inactive'
   let url = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/add-project' +
@@ -50,7 +52,12 @@ export const addProject = (jobDetails, makeActive) => dispatch => {
   '&project_name=' + jobDetails['Name'] +
   '&make_active=' + isProjectActive
   let data
-  fetch(url)
+  fetch(url, {
+        headers: {
+            "authtoken": authObject.token,
+            "accesstoken": authObject.accessToken
+        },
+    })
   .then(response => response.json())
   .then(response => {
     dispatch({
@@ -61,10 +68,14 @@ export const addProject = (jobDetails, makeActive) => dispatch => {
 }
 
 export const getProjects = (authObject) => dispatch => {
-  let url = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/get-project?jwt='
-  + authObject.token + '&accesstoken=' + authObject.accessToken
+  let url = 'https://kxvyma0140.execute-api.ap-southeast-2.amazonaws.com/dev/get-project'
   let data = []
-  fetch(url)
+  fetch(url, {
+        headers: {
+            "authtoken": authObject.token,
+            "accesstoken": authObject.accessToken
+        },
+    })
   .then(response => response.json())
   .then(response => {
 
@@ -144,4 +155,9 @@ export const updateProjectNotes = (text, index, number) => dispatch => {
 export const changeHotkeyDropdown = (value, index, dropdown) => ({
   type: CHANGE_HOTKEY_DROPDOWN,
   payload: [value, index, dropdown]
+})
+
+export const addAuth = (authObject) => ({
+  type: ADD_AUTH,
+  payload: authObject
 })

@@ -19,7 +19,7 @@ class ProjectNotes extends Component{
 
   updateText = (e) => {
     const { myProjects, updateProjectNotes, pageId } = this.props
-    updateProjectNotes(e.target.value, this.getIndex(), pageId.replace('-',''))
+    updateProjectNotes(e.target.value, this.getIndex(), pageId)
   }
 
   getIndex = () => {
