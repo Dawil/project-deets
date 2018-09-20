@@ -1,28 +1,25 @@
-export const autoHotKeyGenerate = function(tba, otherTba) {
+export const autoHotKeyGenerate = function(user, hotKeyMappings) {
 
-  let user = 'Caspar.Jeffrey'
+  let region = 'australasia'
 
-  let hotKeyMappings = [
-    { 'project': '236482-00', 'region': 'australasia', 'office': 'SYD', 'hotkey': 'ctrl + 1' },
-    { 'project': '236482-20', 'region': 'australasia', 'office': 'SYD', 'hotkey': 'ctrl + 2' }
-  ]
+  let splashText = 'SplashTextOn ,300,22,,mapping project folder directories'
+
+  let pathText = ` C:\\Users\\` + user + `\\AppData\\Roaming\\Microsoft\\Windows\\Start\` \`Menu\\Programs\\Startup\\startup.ahk`
 
   let loopText = ''
 
-  let loopText1 = `Loop, Files, \\\\global.arup.com\\`
+  let loopText1 = `
+Loop, Files, \\\\global.arup.com\\`
 
-  let loopText2 = `\\Projects\\`
+  let loopText2 = `\*, D
+  loop, Files, %a_loopfilefullpath%\\Projects\\`
 
   let loopText3 = `000\\`
 
   let loopText4 = `*, D
-  {
-  ppath`
+    ppath`
 
   let loopText5 = `:=A_LoopFileFullPath
-  Break
-  }
-
 `
   let hotKeyBindsText = ''
 
@@ -43,19 +40,23 @@ export const autoHotKeyGenerate = function(tba, otherTba) {
 `
 
   hotKeyMappings.forEach((entry, index) => {
-    loopText = loopText + loopText1 + entry.region + '\\' + entry.office + loopText2 + entry.project.substring(0,3) + loopText3 +
+    loopText = loopText + loopText1 + region + '\\' + loopText2 + entry.project.substring(0,3) + loopText3 +
                entry.project.substring(0,6) + loopText4 + index + loopText5,
     hotKeyBindsText = hotKeyBindsText + hotKeyBindsText1 + entry.hotkey.substring(7,8) + hotKeyBindsText2 + index + hotKeyBindsText3,
     hotKeyBindsTextNested = hotKeyBindsTextNested + hotKeyBindsTextNested1 + entry.hotkey.substring(7,8) + hotKeyBindsTextNested2 +
                index + hotKeyBindsTextNested3
   })
 
-  let staticText1 = `FileAppend,
+  let staticText1 = `
+FileDelete,` + pathText
+
+  let staticText2 = `
+FileAppend,
 (
   ;"
 `
 
-  let staticText2 = `; http://msdn.microsoft.com/en-us/library/bb774094
+  let staticText3 = `; http://msdn.microsoft.com/en-us/library/bb774094
   GetActiveExplorer() {
       static objShell := ComObjCreate("Shell.Application")
       WinHWND := WinActive("A")    ; Active window
@@ -73,30 +74,16 @@ export const autoHotKeyGenerate = function(tba, otherTba) {
   }
 )
 
-, C:\\Users\\`
+,`
 
-  let staticText3 = `\\AppData\\Roaming\\Microsoft\\Windows\\Start\` \`Menu\\Programs\\Startup\\startup.ahk
+  let staticText4 = pathText + `
+Run`
 
-;
+  let staticText5 = pathText + `
+SplashTextOff
+
 `
-  let staticText4 = `; http://msdn.microsoft.com/en-us/library/bb774094
-GetActiveExplorer() {
-    static objShell := ComObjCreate("Shell.Application")
-    WinHWND := WinActive("A")    ; Active window
-    for Item in objShell.Windows
-        if (Item.HWND = WinHWND)
-            return Item        ; Return active window object
-    return -1    ; No explorer windows match active window
-}
-
-NavRun(Path) {
-    if (-1 != objIE := GetActiveExplorer())
-        objIE.Navigate(Path)
-    else
-        Run, % Path
-}
-`
-  let text = loopText + staticText1 + hotKeyBindsTextNested + staticText2 + user + staticText3 + hotKeyBindsText + staticText4
+  let text = splashText + loopText + staticText1 + staticText2 + hotKeyBindsTextNested + staticText3 + staticText4 + staticText5
 
   return text
 }

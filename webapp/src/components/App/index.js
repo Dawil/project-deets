@@ -12,7 +12,6 @@ class App extends Component {
 
   componentDidMount() {
     const { auth, addAuth } = this.props
-    console.log(auth)
     this.props.getProjects(auth)
     addAuth(auth)
   }
@@ -20,7 +19,7 @@ class App extends Component {
   render() {
     const headerContent = {
       icon: 'https://s3-ap-southeast-2.amazonaws.com/buildingperformance.arup.digital/bpdb.png',
-      name: 'Project Deets',
+      name: 'APM',
       content: [
         'Lookup',
         'My projects',

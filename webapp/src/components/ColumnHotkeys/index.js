@@ -11,17 +11,23 @@ import { autoHotKeyGenerate } from '../../autoHotKeyGenerate.js'
 class ColumnHotkeys extends Component{
 
   downLoadHotkeys = () => {
-    let element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(autoHotKeyGenerate()));
-    element.setAttribute('download', 'filename.ahk');
+    const { authObject, hotKeyLists } = this.props
+    console.log(authObject)
+    authObject.getUserInfo().then(res =>{
+      let user = res.given_name + '.' + res.family_name
+      let hotKeyMappings = hotKeyLists.filter(item => item.project.length > 0)
+      let element = document.createElement('a');
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(autoHotKeyGenerate(user, hotKeyMappings)));
+      element.setAttribute('download', 'project_folders.ahk');
 
-    element.style.display = 'none';
-    document.body.appendChild(element);
+      element.style.display = 'none';
+      document.body.appendChild(element);
 
-    element.click();
+      element.click();
 
-    document.body.removeChild(element);
-    console.log('downloaded')
+      document.body.removeChild(element);
+      console.log('downloaded')
+    })
   }
 
   render() {
@@ -63,5 +69,8 @@ class ColumnHotkeys extends Component{
 }
 
 export default connect(
-  null, null
+  state => ({
+    authObject: state.MainReducer.authObject,
+    hotKeyLists: state.MainReducer.hotKeyLists
+  }), null
 )(ColumnHotkeys)

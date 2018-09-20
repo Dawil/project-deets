@@ -63,7 +63,7 @@ module.exports = {
    new HtmlWebpackPlugin(
      {
        inject: false,
-       title: 'title here',
+       title: 'APM',
        template: HtmlWebpackTemplate,
        appMountId: 'app',
        meta: [
